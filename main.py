@@ -47,7 +47,9 @@ for file in files:
     future = pool.submit(doHash, file)
     future.add_done_callback(bump)
 
+pool.shutdown(wait=True)
+
 # write the results
-fout = open("hashes.sha1", "w")
+fout = open(os.path.join(path, "sha1sums"), "w")
 for file in sorted(files):
-    fout.write(file.getHash() + " " + file.getPath() + "\n")
+    fout.write(file.getHash() + " " + file.getRelativePath(path) + "\n")

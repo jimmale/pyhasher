@@ -11,7 +11,7 @@ class hasherfile:
 
     def __lt__(self, other):
      return self.path < other.path
-     
+
     def getSize(self):
         if (self.size is -1):
             self.size = os.path.getsize(self.path)
@@ -28,3 +28,6 @@ class hasherfile:
 
     def getPath(self):
         return self.path
+
+    def getRelativePath(self, basePath):
+        return os.path.relpath(self.getPath(), basePath)
